@@ -1,2 +1,2 @@
 # GSIV23_kavibarati_R
-added code challenge repo
+this project is for kavibarati GSynergy React Web Challenge
