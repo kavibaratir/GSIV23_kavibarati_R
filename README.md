@@ -83,6 +83,18 @@ Implements React Router for easy navigation within the application.
     React Redux: State management library for React.
     React Router: Declarative routing for React applications.
 
+## Test Application
+
+To test the development server:
+
+```bash
+npm test
+```
+The application should should be in running status before running the test
+To Test  Run npm test command by opening a parallel command prompt
+
+By Default I have made some test cases to fail and These test cases need to be changed as per the environment and 
+result outputs you expect.
 
 
 
