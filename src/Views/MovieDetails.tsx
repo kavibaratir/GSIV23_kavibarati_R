@@ -1,15 +1,30 @@
+import { css } from "@emotion/css";
 import { FC, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { CardTitle } from "reactstrap";
-
 import { Card, CardBody, CardText, Col, Row } from "reactstrap";
+
 type MovieDetailsProps = {};
 export interface Root {
   id: number;
   cast: Cast[];
   crew: Crew[];
 }
-
+const positiontoCardimage = css`
+  margin-left: 1%;
+  margin-right  : 1%;
+  position:absoute;
+`;
+const positiontoCardDescription = css`
+  margin-top: 1%;
+  position:relative;
+  margin-bottom  : 1%;
+  margin-right  : 1%;
+`;
+const rateStyle=css`
+  color:#9B9B9B;
+  margin-top:-3%
+`
 export interface Cast {
   adult: boolean;
   gender: number;
@@ -65,7 +80,6 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
     fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, options)
       .then((response) => response.json())
       .then((response) => {
-        console.log(response);
         let {
           release_date,
           runtime,
@@ -92,7 +106,6 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
       .then((response) => response.json())
       .then((response) => {
         setCast(response.cast);
-        console.log(response);
         let actors = response.cast.map((item: Cast) => item.name);
         let [actor, coactor] = actors;
         setActor(actor);
@@ -105,7 +118,7 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
   return (
     <>
       <div className="d-flex">
-        <Col md="3" xs="2">
+        <Col md="3" xs="2" className={positiontoCardimage}>
           <Card
             className=" my-2 shadow overflow-hidden"
 
@@ -113,13 +126,11 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
             <img className='center' alt="Sample" src={`https://image.tmdb.org/t/p/original${url}`} /></Card>
 
         </Col>
-        <Card >
-          <Col md="12" xs="8">
+        <Card className={'detail-card '+positiontoCardDescription}>
+          <Col md="12" xs="8" >
             <CardBody>
-              
-                <CardTitle tag="h6">{title}
-                <span>     ({rating})</span></CardTitle>
-              
+              <CardTitle tag="h6">{title}
+                <span className={rateStyle}>     ({rating})</span></CardTitle>           
               <CardText >
               
                   <div className="d-flex justify-content-between">
@@ -137,6 +148,7 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
             </CardBody>
           </Col>
         </Card>
+        
 {/* 
         <div className="d-flex justify-content">
           <h5>{title}</h5>
@@ -152,6 +164,7 @@ const MovieDetails: FC<MovieDetailsProps> = () => {
         </div>
         <div>Description:{overview}</div> */}
       </div>
+     
     </>
   );
 };
